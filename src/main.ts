@@ -3,6 +3,9 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
@@ -17,7 +20,7 @@ async function bootstrap() {
     { whitelist: true, }
   ));
   app.enableCors(/*origin : 'hhtps://www.google.com'*/);
-  await app.listen(process.env.PORT ?? 3001);
+  await app.listen(process.env.PORT || 3001);
   console.log("🚀 Sever is runing at ~ http://localhost:3001 ~ 🚀") 
   console.log("🚀 Try to access ~ http://localhost:3001/api ~ 🚀")
 }
